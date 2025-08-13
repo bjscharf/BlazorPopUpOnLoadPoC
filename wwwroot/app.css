@@ -66,6 +66,7 @@ h1:focus {
 
 .toast-header {
     background: lightgray;
+    padding:0 5px 0 5px;
 }
 .toast-success {
     background-color: seagreen;
@@ -82,4 +83,7 @@ h1:focus {
     color: whitesmoke;
 }
 
-.toast .show {
+.toast {
+    min-width:150px;
+    width:fit-content;
+}
