@@ -1,7 +1,4 @@
 ﻿@using System.Timers
-@{
-    var showClass = IsVisible ? "d-block" : "d-none";
-}
 
 <div class="toast-container p-3 sto-toast @showClass" data-bs-autohide="true" data-bs-delay="5000">
     <div class="toast show sto-toast-content" role="alert" aria-live="assertive" aria-atomic="true">
@@ -32,11 +29,13 @@
     [Parameter]
     public string? BodyText { get; set; }
 
-    private System.Timers.Timer timer;
+    private System.Timers.Timer timer = new Timer();
 
     private string toastTypeClass = "toast-success";
 
     private bool IsSticky = false;
+
+    private string showClass => IsVisible ? "d-block" : "d-none";
 
     public void Show(string bodyText, string headerText = "", ToastType toastType = ToastType.Success, bool isSticky=false)
     {
@@ -50,7 +49,8 @@
         {
             ToastType.Success => "toast-success",
             ToastType.Error => "toast-error",
-            ToastType.Info => "toast-info"
+            ToastType.Info => "toast-info",
+            _ => string.Empty
         };
         StateHasChanged();
 
