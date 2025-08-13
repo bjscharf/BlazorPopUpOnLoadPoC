@@ -12,7 +12,12 @@
 <button class="btn btn-primary" @onclick="Success">Success me</button>
 <button class="btn btn-primary" @onclick="Error">Error me</button>
 <button class="btn btn-primary" @onclick="Info">Info me</button>
+<p> sticky:</p>
 <Popup @ref="popupRef" />
+
+<button class="btn btn-primary" @onclick="SuccessSticky">Success me</button>
+<button class="btn btn-primary" @onclick="ErrorSticky">Error me</button>
+<button class="btn btn-primary" @onclick="InfoSticky">Info me</button>
 
 @code {
     private int currentCount = 0;
@@ -49,5 +54,23 @@
     {
         currentCount++;
         popupRef.Show("message here", "title here", ToastType.Info);
+    }
+
+    private void SuccessSticky()
+    {
+        currentCount++;
+        popupRef.Show("message here", "title here", ToastType.Success, true);
+    }
+
+    private void ErrorSticky()
+    {
+        currentCount++;
+        popupRef.Show("message here", "title here", ToastType.Error, true);
+    }
+
+    private void InfoSticky()
+    {
+        currentCount++;
+        popupRef.Show("message here", "title here", ToastType.Info, true);
     }
 }
