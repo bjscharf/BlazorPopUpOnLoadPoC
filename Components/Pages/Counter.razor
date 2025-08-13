@@ -1,0 +1,53 @@
+﻿@page "/counter"
+@using BlazorPopUpOnLoadPoC.Components.Common
+@using System.Timers
+@rendermode InteractiveServer
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="Success">Success me</button>
+<button class="btn btn-primary" @onclick="Error">Error me</button>
+<button class="btn btn-primary" @onclick="Info">Info me</button>
+<Popup @ref="popupRef" />
+
+@code {
+    private int currentCount = 0;
+    private Popup popupRef = new Popup();
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (!popupRef.IsVisible)
+            {
+                popupRef.Show("message here", "title here");
+
+                StateHasChanged();
+            }
+
+        }
+    }
+
+
+    private void Success()
+    {
+        currentCount++;
+        popupRef.Show("message here", "title here");
+    }
+
+    private void Error()
+    {
+        currentCount++;
+        popupRef.Show("message here", "title here", ToastType.Error);
+    }
+
+    private void Info()
+    {
+        currentCount++;
+        popupRef.Show("message here", "title here", ToastType.Info);
+    }
+}
