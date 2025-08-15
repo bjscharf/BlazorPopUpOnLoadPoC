@@ -104,10 +104,10 @@
         hiddenClass = string.Empty;
     }
 
-    public void HideLoadingSpinner()
+    async public void HideLoadingSpinner()
     {
         IsVisible = false;
-        Task.Delay(500);
+        await Task.Delay(500);
 
         hiddenClass = "hidden";
         if (IsVisible == false)

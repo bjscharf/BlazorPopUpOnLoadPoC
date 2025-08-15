@@ -58,18 +58,7 @@ else
             Summary = summaries[Random.Shared.Next(summaries.Length)]
         }).ToArray();
 
-        var timer = new Timer();
-        timer.Interval = 100;
-        timer.Elapsed += async (object? sender, ElapsedEventArgs e) =>
-        {
-            timer.Enabled = false;
-            await InvokeAsync(() =>
-                {
-                    _spinnerService.Hide();
-                    StateHasChanged(); // Required when updating from external context
-            });
-        };
-        timer.Enabled = true;
+        _spinnerService.Hide();
     }
 
     private class WeatherForecast
