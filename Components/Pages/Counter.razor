@@ -1,7 +1,10 @@
 ﻿@page "/counter"
+@rendermode InteractiveServer
 @using BlazorPopUpOnLoadPoC.Components.Common
 @using System.Timers
-@rendermode InteractiveServer
+@using BlazorPopUpOnLoadPoC.Misc
+@inject NavigationManager NavigationManager
+@inject SpinnerService _spinnerService
 
 <PageTitle>Counter</PageTitle>
 
@@ -19,9 +22,20 @@
 <button class="btn btn-primary" @onclick="ErrorSticky">Error me</button>
 <button class="btn btn-primary" @onclick="InfoSticky">Info me</button>
 
+<button class="btn btn-primary" @onclick="Save" disabled="@saving">Save and redirection</button>
+@if (saving)
+{
+    <p>it is saving</p>    
+}
+else
+{
+    <p>It is NOT saving</p>
+}
+
 @code {
     private int currentCount = 0;
     private Popup popupRef = new Popup();
+    private bool saving = false;
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -72,5 +86,15 @@
     {
         currentCount++;
         popupRef.Show("message here", "title here", ToastType.Info, true);
+    }
+
+    private async Task Save()
+    {
+        saving = true;
+        _spinnerService.Show();
+        
+        // await Task.Delay(5000);
+        // NavigationManager.NavigateTo("Home");
+        // _spinnerService.Hide();
     }
 }

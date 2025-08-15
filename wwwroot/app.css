@@ -87,3 +87,61 @@ h1:focus {
     min-width:150px;
     width:fit-content;
 }
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    10% {
+        transform: scale(1.05);
+    }
+
+    20% {
+        transform: scale(1.10);
+    }
+
+    30% {
+        transform: scale(1.15);
+    }
+
+    40% {
+        transform: scale(1.20);
+    }
+
+    45% {
+        transform: scale(1.225);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+
+    55% {
+        transform: scale(1.225);
+    }
+
+    60% {
+        transform: scale(1.20);
+    }
+
+    70% {
+        transform: scale(1.15);
+    }
+
+    80% {
+        transform: scale(1.10);
+    }
+
+    90% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pulse {
+    animation: pulse 4s infinite; 
+}

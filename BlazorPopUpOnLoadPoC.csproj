@@ -7,7 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\WVSTO-SEAL.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\WVSTO-SEAL.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.3.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Images\WVSTO-SEAL.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

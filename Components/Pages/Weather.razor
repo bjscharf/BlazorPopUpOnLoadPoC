@@ -46,7 +46,7 @@ else
     protected override async Task OnParametersSetAsync()
     {
         _spinnerService.Show();     
-        StateHasChanged(); ;
+
         // Simulate asynchronous loading to demonstrate streaming rendering
         await Task.Delay(3000);
 
