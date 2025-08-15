@@ -50,6 +50,7 @@
             @if(Type == SpinnerType.Icon)
             {
                 <div class="icon-container">
+                    <p>name: @RendererInfo.Name</p>
                     @if(!string.IsNullOrEmpty(Icon))
                     {
                         <object type="image/svg+xml" class="icon" data="@Icon">SVG not supported</object>
@@ -112,8 +113,5 @@
         hiddenClass = "hidden";
         if (IsVisible == false)
             StateHasChanged();
-
-
-
     }
 }

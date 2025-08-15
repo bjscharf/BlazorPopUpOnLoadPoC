@@ -1,6 +1,5 @@
 ﻿@page "/weather"
-@attribute [StreamRendering]
-@rendermode InteractiveServer
+@* @attribute [StreamRendering] *@
 @using System.Timers
 @using BlazorPopUpOnLoadPoC.Misc
 @inject SpinnerService _spinnerService
@@ -59,6 +58,7 @@ else
         }).ToArray();
 
         _spinnerService.Hide();
+        StateHasChanged();
     }
 
     private class WeatherForecast
