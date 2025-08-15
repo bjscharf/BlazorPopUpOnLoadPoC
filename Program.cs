@@ -1,7 +1,8 @@
 using BlazorPopUpOnLoadPoC.Components;
+using BlazorPopUpOnLoadPoC.Misc;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddScoped<SpinnerService>();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
