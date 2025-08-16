@@ -43,7 +43,7 @@
 
 </style>
 
-@inject SpinnerService _spinnerService
+@inject BaseService _baseService
 
 <div class="loading-overlay @hiddenClass">
 	<div class="loading-container">
@@ -63,8 +63,8 @@
 
 	protected override void OnInitialized()
 	{
-		_spinnerService.OnShow += ShowLoadingSpinner;
-		_spinnerService.OnHide += HideLoadingSpinner;
+		_baseService.OnShow += ShowLoadingSpinner;
+		_baseService.OnHide += HideLoadingSpinner;
 	}
 
 	public void ShowLoadingSpinner()

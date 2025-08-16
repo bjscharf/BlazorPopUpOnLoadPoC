@@ -3,7 +3,7 @@
 @rendermode InteractiveServer
 @using System.Timers
 @using BlazorPopUpOnLoadPoC.Misc
-@inject SpinnerService _spinnerService
+@inject BaseService _baseService
 
 <PageTitle>Weather</PageTitle>
 
@@ -45,7 +45,7 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
-        _spinnerService.Show();     
+        _baseService.Show();     
 
         // Simulate asynchronous loading to demonstrate streaming rendering
         await Task.Delay(3000);
@@ -59,7 +59,7 @@ else
             Summary = summaries[Random.Shared.Next(summaries.Length)]
         }).ToArray();
 
-        _spinnerService.Hide();
+        _baseService.Hide();
         StateHasChanged();
     }
 

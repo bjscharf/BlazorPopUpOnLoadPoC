@@ -8,7 +8,7 @@
         Text = 2
     }
 
-    public class SpinnerService
+    public class BaseService
     {
         public event Action? OnShow;
         public event Action? OnHide;
@@ -22,7 +22,7 @@
         public bool IsSticky { get; set; } = false;
         private ToastData? toastData { get; set; }
 
-        public SpinnerService()
+        public BaseService()
         {
             toastData = new ToastData();
         }

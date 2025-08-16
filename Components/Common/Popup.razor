@@ -1,7 +1,7 @@
 ﻿@rendermode InteractiveServer
 @using System.Timers
 @using BlazorPopUpOnLoadPoC.Misc
-@inject SpinnerService _spinnerService
+@inject BaseService _baseService
 @implements IDisposable;
 
 <div class="toast-container p-3 sto-toast @showClass" data-bs-autohide="true" data-bs-delay="5000">
@@ -43,8 +43,8 @@
 
     protected override void OnInitialized()
     {
-        _spinnerService.OnToastShow += Show;
-        _spinnerService.OnToastHide += Close;
+        _baseService.OnToastShow += Show;
+        _baseService.OnToastHide += Close;
     }
 
     public void Show()
@@ -53,7 +53,7 @@
         if (IsVisible)
             return; 
 
-        var toastData = _spinnerService.GetToastData();
+        var toastData = _baseService.GetToastData();
         HeaderText = toastData.Title;
         BodyText = toastData.Message;
         IsVisible = true;
@@ -83,8 +83,8 @@
 
     public void Dispose()
     {
-        _spinnerService.OnToastShow -= Show;
-        _spinnerService.OnToastHide -= Close;
+        _baseService.OnToastShow -= Show;
+        _baseService.OnToastHide -= Close;
     }
 
     public void Close()
