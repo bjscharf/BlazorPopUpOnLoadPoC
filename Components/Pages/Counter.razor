@@ -16,7 +16,7 @@
 <button class="btn btn-primary" @onclick="Error">Error me</button>
 <button class="btn btn-primary" @onclick="Info">Info me</button>
 <p> sticky:</p>
-<Popup @ref="popupRef" />
+@* <Popup @ref="popupRef" /> *@
 
 <button class="btn btn-primary" @onclick="SuccessSticky">Success me</button>
 <button class="btn btn-primary" @onclick="ErrorSticky">Error me</button>
@@ -34,20 +34,16 @@ else
 
 @code {
     private int currentCount = 0;
-    private Popup popupRef = new Popup();
+    //private Popup popupRef = new Popup();
     private bool saving = false;
 
     protected override void OnAfterRender(bool firstRender)
     {
         if (firstRender)
         {
-            if (!popupRef.IsVisible)
-            {
-                popupRef.Show("message here", "title here");
+                _spinnerService.ToastShow("message here", "title here", ToastType.Success, false);
 
                 StateHasChanged();
-            }
-
         }
     }
 
@@ -55,37 +51,37 @@ else
     private void Success()
     {
         currentCount++;
-        popupRef.Show("message here", "title here");
+        //popupRef.Show("message here", "title here");
     }
 
     private void Error()
     {
         currentCount++;
-        popupRef.Show("message here", "title here", ToastType.Error);
+        //popupRef.Show("message here", "title here", ToastType.Error);
     }
 
     private void Info()
     {
         currentCount++;
-        popupRef.Show("message here", "title here", ToastType.Info);
+        //popupRef.Show("message here", "title here", ToastType.Info);
     }
 
     private void SuccessSticky()
     {
         currentCount++;
-        popupRef.Show("message here", "title here", ToastType.Success, true);
+        //popupRef.Show("message here", "title here", ToastType.Success, true);
     }
 
     private void ErrorSticky()
     {
         currentCount++;
-        popupRef.Show("message here", "title here", ToastType.Error, true);
+        //popupRef.Show("message here", "title here", ToastType.Error, true);
     }
 
     private void InfoSticky()
     {
         currentCount++;
-        popupRef.Show("message here", "title here", ToastType.Info, true);
+        _spinnerService.ToastShow("message here", "title here", ToastType.Info, true);
     }
 
     private async Task Save()
@@ -93,8 +89,8 @@ else
         saving = true;
         _spinnerService.Show();
         
-        // await Task.Delay(5000);
-        // NavigationManager.NavigateTo("Home");
-        // _spinnerService.Hide();
+         await Task.Delay(5000);
+         NavigationManager.NavigateTo("Home");
+         _spinnerService.Hide();
     }
 }

@@ -1,4 +1,7 @@
-﻿@using System.Timers
+﻿@rendermode InteractiveServer
+@using System.Timers
+@using BlazorPopUpOnLoadPoC.Misc
+@inject SpinnerService _spinnerService
 
 <div class="toast-container p-3 sto-toast @showClass" data-bs-autohide="true" data-bs-delay="5000">
     <div class="toast show sto-toast-content" role="alert" aria-live="assertive" aria-atomic="true">
@@ -37,25 +40,33 @@
 
     private string showClass => IsVisible ? "d-block" : "d-none";
 
-    public void Show(string bodyText, string headerText = "", ToastType toastType = ToastType.Success, bool isSticky=false)
+    protected override void OnInitialized()
     {
+        _spinnerService.OnToastShow += Show;
+        _spinnerService.OnToastHide += Close;
+    }
+
+    public void Show()
+    {
+        
         if (IsVisible)
             return; 
 
-        HeaderText = headerText;
-        BodyText = bodyText;
+        var toastData = _spinnerService.GetToastData();
+        HeaderText = toastData.Title;
+        BodyText = toastData.Message;
         IsVisible = true;
-        IsSticky = isSticky;
-        toastTypeClass = toastType switch
+        IsSticky = toastData.IsSticky;
+        toastTypeClass = toastData.Type switch
         {
             ToastType.Success => "toast-success",
-            ToastType.Error => "toast-error",
+            ToastType.Danger => "toast-error",
             ToastType.Info => "toast-info",
             _ => string.Empty
         };
         StateHasChanged();
 
-        if (!isSticky)
+        if (!toastData.IsSticky)
         {
             timer = new();
             timer.Interval = 2000;

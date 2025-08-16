@@ -16,7 +16,7 @@
 		<article class="content px-4">
 			@Body
 		</article>
-		<Popup @ref="popupRef" />
+		<Popup></Popup>
 	</main>
 </div>
 
@@ -28,21 +28,5 @@
 
 
 @code {
-	protected Popup popupRef = new Popup();
 
-
-
-	protected override void OnAfterRender(bool firstRender)
-	{
-		if (firstRender)
-		{
-			if (!popupRef.IsVisible)
-			{
-				popupRef.Show("message here", "title here");
-
-				// StateHasChanged();
-			}
-
-		}
-	}
 }
