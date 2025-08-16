@@ -2,6 +2,7 @@
 @using System.Timers
 @using BlazorPopUpOnLoadPoC.Misc
 @inject SpinnerService _spinnerService
+@implements IDisposable;
 
 <div class="toast-container p-3 sto-toast @showClass" data-bs-autohide="true" data-bs-delay="5000">
     <div class="toast show sto-toast-content" role="alert" aria-live="assertive" aria-atomic="true">
@@ -48,7 +49,7 @@
 
     public void Show()
     {
-        
+
         if (IsVisible)
             return; 
 
@@ -78,6 +79,12 @@
             };
             timer.Enabled = true;
         }
+    }
+
+    public void Dispose()
+    {
+        _spinnerService.OnToastShow -= Show;
+        _spinnerService.OnToastHide -= Close;
     }
 
     public void Close()

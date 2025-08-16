@@ -20,16 +20,18 @@
         public string ToastTitle { get; set; } = "test2";
         public ToastType TypeOfToast { get; set; } = ToastType.Success;
         public bool IsSticky { get; set; } = false;
+        private ToastData? toastData { get; set; }
+
+        public SpinnerService()
+        {
+            toastData = new ToastData();
+        }
 
         public ToastData GetToastData()
         {
-            return new ToastData
-            {
-                IsSticky = IsSticky,
-                Message = ToastMessage,
-                Title = ToastTitle,
-                Type = TypeOfToast
-            };
+            if (toastData == null)
+                toastData = new ToastData();
+            return toastData;
         }
 
         public void Show()
@@ -42,8 +44,14 @@
             OnHide?.Invoke();
         }
 
-        public void ToastShow(string message, string title, ToastType toastType, bool isSticky)
+        public void ToastShow(string message, string title, ToastType toastType = ToastType.Success, bool isSticky = false)
         {
+            if (toastData is null)
+                return;
+            toastData.Message = message;
+            toastData.Title = title;
+            toastData.Type = toastType;
+            toastData.IsSticky = isSticky;
             OnToastShow?.Invoke();
         }
 
