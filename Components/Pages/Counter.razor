@@ -16,26 +16,15 @@
 <button class="btn btn-primary" @onclick="Error">Error me</button>
 <button class="btn btn-primary" @onclick="Info">Info me</button>
 <p> sticky:</p>
-@* <Popup @ref="popupRef" /> *@
 
 <button class="btn btn-primary" @onclick="SuccessSticky">Success me</button>
 <button class="btn btn-primary" @onclick="ErrorSticky">Error me</button>
 <button class="btn btn-primary" @onclick="InfoSticky">Info me</button>
 
-<button class="btn btn-primary" @onclick="Save" disabled="@saving">Save and redirection</button>
-@if (saving)
-{
-    <p>it is saving</p>    
-}
-else
-{
-    <p>It is NOT saving</p>
-}
+<button class="btn btn-primary" @onclick="Save">Save and redirection</button>
 
 @code {
     private int currentCount = 0;
-    //private Popup popupRef = new Popup();
-    private bool saving = false;
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -51,31 +40,31 @@ else
     private void Success()
     {
         currentCount++;
-        //popupRef.Show("message here", "title here");
+        _baseService.ToastShow("message here", "title here", ToastType.Success, false);
     }
 
     private void Error()
     {
         currentCount++;
-        //popupRef.Show("message here", "title here", ToastType.Error);
+        _baseService.ToastShow("message here", "title here", ToastType.Danger, false);
     }
 
     private void Info()
     {
         currentCount++;
-        //popupRef.Show("message here", "title here", ToastType.Info);
+        _baseService.ToastShow("message here", "title here", ToastType.Info, false);
     }
 
     private void SuccessSticky()
     {
         currentCount++;
-        //popupRef.Show("message here", "title here", ToastType.Success, true);
+        _baseService.ToastShow("message here", "title here", ToastType.Success, true);
     }
 
     private void ErrorSticky()
     {
         currentCount++;
-        //popupRef.Show("message here", "title here", ToastType.Error, true);
+        _baseService.ToastShow("message here", "title here", ToastType.Danger, true);
     }
 
     private void InfoSticky()
@@ -86,7 +75,6 @@ else
 
     private async Task Save()
     {
-        saving = true;
         _baseService.Show();
         
          await Task.Delay(5000);
